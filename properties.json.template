@@ -1,0 +1,24 @@
+{
+	"stage_dir" : "Staging directory on local file system to store intermediate files",
+	"mcr_root" : "Points to local file system directory where MCR is installed",
+	"mcr_cache_root" : "Points to local file system directory where MCR can store cache",
+	"algorithms" : [	//JSON array of allowed algorithms that can be executed. You can add more.
+		{
+			"name":"Algorithm name. Must match algorithm name passed on command line",
+			"binary_dir" : "Base directory on local file system where algorithm scripts are stored",
+			"executables" : [	
+				//JSON array of commands/shell scripts with their input arguments to be executed as part of this algorithm.
+				//If MCR installation dir is to be passed, mention %MCR_ROOT% in argument at appropriate place.
+				//If original input split to mapper is to be passed, mention%INPUT_FILE% in argument at appropriate place.
+				//If intermediate temp .mat file is to be created and passed, use %TMP_MAT_FILE_N%, at appropriate place. (N can be any int).
+				//If same tmp .mat file is to be passed between multiple scripts, use same value of N.
+
+				{"command" : "run_cranker_read.sh %MCR_ROOT% %INPUT_FILE% %TMP_MAT_FILE_1%"},
+				{"command" : "run_cranker_solve.sh %MCR_ROOT% %TMP_MAT_FILE_1% %TMP_MAT_FILE_2%"},
+				{"command" : "run_cranker_write.sh %MCR_ROOT% %TMP_MAT_FILE_1% %TMP_MAT_FILE_2%"},
+			],
+			"hdfs_in_dir" : "HDFS directory where input data is stored",
+			"hdfs_out_dir" : "HDFS directory where output should be put"
+		}
+	]
+}

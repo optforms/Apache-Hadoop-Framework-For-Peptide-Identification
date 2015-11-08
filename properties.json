@@ -1,0 +1,18 @@
+{
+	"stage_dir" : "/tmp/stg",
+	"mcr_root" : "/opt/MATLAB/MATLAB_Compiler_Runtime/v713",
+	"mcr_cache_root" : "/tmp/mcr_cache",
+	"algorithms" : [
+		{
+			"name":"CRANKER",
+			"binary_dir" : "/home/haisenberg/CRANKER/bin_linux_64bit/",
+			"executables" : [
+				{"command" : "run_cranker_read.sh %MCR_ROOT% %INPUT_FILE% %TMP_MAT_FILE_1%"},
+				{"command" : "run_cranker_solve.sh %MCR_ROOT% %TMP_MAT_FILE_1% %TMP_MAT_FILE_2%"},
+				{"command" : "run_cranker_write.sh %MCR_ROOT% %TMP_MAT_FILE_1% %TMP_MAT_FILE_2%"},
+			],
+			"hdfs_in_dir" : "/input",
+			"hdfs_out_dir" : "/output"
+		}
+	]
+}
